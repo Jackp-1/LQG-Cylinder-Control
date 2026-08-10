@@ -6,7 +6,8 @@ fig = figure('Color','w', ...
 t = tiledlayout(fig,1,4, ...
     'TileSpacing','compact', ...
     'Padding','compact');
-
+t.Units = 'normalized';
+t.OuterPosition = [0.03 0.02 0.97 0.96];
 lw  = 1.6;
 clr1 = [0 0 0];
 clr2 = [230/255 20/255   0/255];
@@ -23,6 +24,7 @@ scatter(1:r,Sd(1:r),30,'red')
 set(gca,'yscale','log')
 ylabel('Singular value, $\sigma_r$','Interpreter','latex',Rotation=90)
 ylim([0.1 30])
+grid(ax, "on")
 yyaxis right
 ax = gca;
 ax.YColor = [0/255 20/255   230/255];
@@ -30,10 +32,10 @@ semilogy(cumsum(Sd)/sum(Sd),'--','Color',[0/255 0/255 0/255], 'LineWidth', lw)
 hold on;
 scatter(1:length(Sd),cumsum(Sd/sum(Sd)),30,'s','MarkerEdgeColor',[0/255 0/255 0/255]);
 scatter(1:r,cumsum(Sd(1:r)/sum(Sd)),30,'s','MarkerEdgeColor',[230/255 20/255 0/255])
-plot(11*ones(1,10),linspace(0,0.7723,10),'-.'); plot(linspace(11,25,10),ones(1,10)*0.7723,'-.');
+plot(11*ones(1,10),linspace(0,0.7723,10),'-.',LineWidth=1.5); plot(linspace(11,25,10),ones(1,10)*0.7723,'-.',LineWidth=1.5);
 xlim([0 25])
 ylabel('Cumulative Energy','Interpreter','latex',Rotation=270)
-grid(ax1, 'on');
+grid(ax, 'on');
 box(ax1, 'off');
 xlabel('r','Interpreter','latex')
 ylim([0 1])
@@ -59,7 +61,6 @@ set(gca,'XTick',[25 300 600 900 1200 1500 1800 2100 2375],'XTickLabel',{'-2','-1
 set(gca,'YTick',[150 450 750],'YTickLabel',{'1','0','-1'});
 a = get(gca,'XTickLabel');
 set(gca,'XTickLabel',a,'FontName','Times')
-axis equal
 xlabel('$x/ D$','Interpreter','latex')
 ylabel('$y/ D$','rotation',90,'Interpreter','latex')
 %Plot Cylinder overlay
@@ -80,5 +81,8 @@ set(axs, ...
     'XMinorTick',    'on', ...
     'YMinorTick',    'on', ...
     'XScale',        'linear', ...
-    'Layer',         'top');
+    'Layer',         'bottom');
 
+set(ax2,'Layer','top')
+
+exportgraphics(gcf,"Fig4.eps","ContentType","vector")

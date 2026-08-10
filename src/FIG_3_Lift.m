@@ -19,7 +19,7 @@ plot(Tau(1:size(Train_lift,1)),Train_lift(:,2)/q, 'Color', clr1, 'LineWidth', lw
 plot(Tau(1:size(Train_lift,1)),(sys{r}.C*x_train{r}/q),'Color', clr2, 'LineWidth', lw,'LineStyle','--')
 grid(ax1, 'on');
 box(ax1, 'off');
-xlim([0 5])
+
 ylim([-1.2 1.2])
 ylabel('$C_l$','Interpreter','latex','Rotation',90)
 legend('uRANS','ROM', ...
@@ -48,11 +48,15 @@ set(axs, ...
     'XMinorTick','on', ...
     'YMinorTick','on', ...
     'XScale','linear', ...
-    'Layer','top');
+    'Layer','bottom');
 
 xticklabels(ax1,[]);
-
+xticks(ax2,[0 1 2 3 4 5])
+xlim(ax1, [0 5])
+xlim(ax2, [0 5])
 xlabel(ax2,'$\tau$','Interpreter','latex');
 
 ax1.YLabel.Units = 'normalized';
 ax2.YLabel.Units = 'normalized';
+
+exportgraphics(gcf,"Fig3.eps","ContentType","vector")

@@ -97,7 +97,7 @@ set(axs, ...
     'XMinorTick',    'on', ...
     'YMinorTick',    'on', ...
     'XScale',        'linear', ...
-    'Layer',         'top');
+    'Layer',         'bottom');
 
 
 ax1.XTickLabel = [];
@@ -106,3 +106,5 @@ ax2.XTickLabel = [];
 ax1.YLabel.Units = 'normalized';
 ax2.YLabel.Units = 'normalized';
 ax3.YLabel.Units = 'normalized';
+
+exportgraphics(gcf,"Fig11.eps","ContentType","vector")
