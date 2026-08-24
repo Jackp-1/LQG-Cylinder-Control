@@ -37,7 +37,7 @@ xlim([0 25])
 ylabel('Cumulative Energy','Interpreter','latex',Rotation=270)
 grid(ax, 'on');
 box(ax1, 'off');
-xlabel('r','Interpreter','latex')
+xlabel('$r$','Interpreter','latex')
 ylim([0 1])
 
 ax2 = nexttile(t,2,[1 3]);
@@ -53,7 +53,7 @@ r=11;
 contourf(real(DAT),40,'LineColor','none'); hold on; 
 contour(real(DAT),6,'LineColor','k','LineStyle','-.')
 colormap('redblue')
-title('Mode 1 (25.3\%), St=0.21','FontWeight','Normal','FontSize',16)
+title('Mode 1 (25.3\%), $St$=0.21','FontWeight','Normal','FontSize',16,Interpreter='latex')
 hold on
 
 % Clean up axes
@@ -61,8 +61,8 @@ set(gca,'XTick',[25 300 600 900 1200 1500 1800 2100 2375],'XTickLabel',{'-2','-1
 set(gca,'YTick',[150 450 750],'YTickLabel',{'1','0','-1'});
 a = get(gca,'XTickLabel');
 set(gca,'XTickLabel',a,'FontName','Times')
-xlabel('$x/ D$','Interpreter','latex')
-ylabel('$y/ D$','rotation',90,'Interpreter','latex')
+xlabel('$x/D$','Interpreter','latex')
+ylabel('$y/D$','rotation',90,'Interpreter','latex')
 %Plot Cylinder overlay
 theta= (1:101)/100'*2*pi;
 x=600+150*sin(theta);

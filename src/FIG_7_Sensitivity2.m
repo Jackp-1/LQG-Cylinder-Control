@@ -11,7 +11,7 @@ plantIndex      = 11;
 controllerIndex = [5, 11];
 curveLabels = {
     '$c=5,\ r=11$'
-    '$c=r=11$'
+    '$c=11,\ r=11$'
 };
 plantData = sys{plantIndex};
 
@@ -58,7 +58,7 @@ xlim(ax, [0.05, 0.5]);
 ylim([-40 15])
 xlabel( ...
     ax, ...
-    'Strouhal number, $\mathrm{St}$', ...
+    'Strouhal number, $St$', ...
     'Interpreter', 'latex');
 
 ylabel( ...

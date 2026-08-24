@@ -9,9 +9,9 @@ t = tiledlayout(fig, 3, 1, ...
 ax1 = nexttile(t);
 plot(Tau(1:73001),SRS_Base_Lift(7000:80000,2)/(q*2),'LineWidth',1); % q*2 to account for spanwise length
 hold on;
-plot(Tau(1:73001),[SRS_Base_Lift(7000:29368,2); SRS_Control(1:50632,13)]/(q*2),'LineWidth',1);
+plot(Tau(1:102298),[SRS_Base_Lift(7000:29297,2); SRS_Control(:,13)]/(q*2),'LineWidth',1);
 grid on
-ylabel('$C_l$',Interpreter='latex',fontsize=16)
+ylabel('$C_\mathrm{l}$',Interpreter='latex',fontsize=16)
 legend('Base','Feedback',Interpreter='latex',fontsize=12, location='northwest')
 xlim([0 85])
 ylim([-1.2 1.2])
@@ -28,9 +28,9 @@ axis1.Position = [left bottom ax_width ax_height];
 ax2 = nexttile(t);
 plot(Tau(1:73001),SRS_Base_Drag(7000:80000,2)/(q*2),'LineWidth',1);
 hold on;
-plot(Tau(1:73001),[SRS_Base_Drag(7000:29368,2); SRS_Control(1:50632,end)]/(q*2),'LineWidth',1);
+plot(Tau(1:102298),[SRS_Base_Drag(7000:29297,2); SRS_Control(:,end)]/(q*2),'LineWidth',1);
 plot(Tau(1:73001),ones(1,73001)*1.07,'r-.','LineWidth',1.5)
-ylabel('$C_d$',Interpreter='latex',fontsize=16)
+ylabel('$C_\mathrm{d}$',Interpreter='latex',fontsize=16)
 grid on
 xlim([0 85])
 ylim([0.7 1.4])
@@ -43,13 +43,13 @@ axis2.Position = [left bottom ax_width ax_height];
 
 ax3 = nexttile(t);
 hold on;
-plot(Tau(1:73001),([zeros(22369,1); SRS_Control(1:50632,end-1)].^2*0.05)/(U_inf^2),'LineWidth',1);
+plot(Tau(1:102298),([zeros(22298,1); SRS_Control(:,end-1)].^2*0.05)/(U_inf^2),'LineWidth',1);
 ylabel('$C_\mu$',Interpreter='latex',fontsize=16)
 xlabel('$\tau$',Interpreter='latex',fontsize=16)
 xlim([0 85])
 grid on
 text(ax2, ...
-    0.18, 0.75,'$\bar{C}_{d,base,3d}$', ...
+    0.18, 0.75,'$\bar{C}_\mathrm{d,base,3d}$', ...
     'Units','normalized', ...
     'FontName','Times New Roman', ...
     'FontSize',18, ...

@@ -77,9 +77,9 @@ plot(Reynolds,Base,'-ko',LineWidth=1.5,MarkerSize=10); hold on;
 plot(Reynolds,Control,'-ks',LineWidth=1.5,MarkerSize=10);
 plot(Reynolds,Min,'-kx',LineWidth=1.5,MarkerSize=10); 
 plot([1000 1000],[0.7 1.2],'-.r')
-xlabel('Reynolds number','Interpreter','latex')
-ylabel('$\bar{C}_d$','Interpreter','latex')
-legend('$\bar{C}_{d,base}$','$\bar{C}_{d,c}$','$\bar{C}_{d,min}$','Location','best',Interpreter='latex',fontsize=14)
+xlabel('Reynolds number, $Re$','Interpreter','latex')
+ylabel('$\bar{C}_\mathrm{d}$','Interpreter','latex')
+legend('$\bar{C}_\mathrm{d,base}$','$\bar{C}_\mathrm{d,c}$','$\bar{C}_\mathrm{d,min}$','Location','best',Interpreter='latex',fontsize=14)
 grid on
 
 tilePos = [3 4 7 8];
@@ -90,7 +90,7 @@ plot(f{1}/f_shed, 20*log10(pxx{1}),'-k','LineWidth', 1.5);
 plot(f{6}/f_shed, 20*log10(pxx{6}),'-.r', 'LineWidth', 1.5);
 grid(ax2,'on')
 box(ax2,'off')
-ylabel('PSD/F+')
+ylabel('PSD/F$^+$',Interpreter='latex')
 xlim([0 15])
 ylim([-175 60])
 title('$Re=500$','Interpreter','latex')
@@ -110,8 +110,8 @@ plot(f{4}/f_shed, 20*log10(pxx{4}),'-k','LineWidth', 1.5);
 plot(f{9}/f_shed, 20*log10(pxx{9}),'-.r', 'LineWidth', 1.5);
 grid(ax4,'on')
 box(ax4,'off')
-xlabel('F+')
-ylabel('PSD/F+')
+xlabel('F$^+$',Interpreter='latex')
+ylabel('PSD/F$^+$',Interpreter='latex')
 xlim([0 15])
 ylim([-175 60])
 title('$Re=1250$','Interpreter','latex')
@@ -121,7 +121,7 @@ plot(f{5}/f_shed, 20*log10(pxx{5}),'-k','LineWidth', 1.5);
 plot(f{10}/f_shed, 20*log10(pxx{10}),'-.r', 'LineWidth', 1.5);
 grid(ax5,'on')
 box(ax5,'off')
-xlabel('F+')
+xlabel('F$^+$',Interpreter='latex')
 xlim([0 15])
 ylim([-175 60])
 title('$Re=2000$','Interpreter','latex')

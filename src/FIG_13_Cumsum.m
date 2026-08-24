@@ -13,8 +13,8 @@ plot(Tau(1:24000),sum(cumsum(R1e_5(:,1:12).^2*Qi_R{11}+1e-5*R1e_5(:,end-1).^2),2
 plot(Tau(1:24000),sum(cumsum(R2e_5(:,1:12).^2*Qi_R{11}+2e-5*R2e_5(:,end-1).^2),2),'LineWidth',1.5); 
 plot(Tau(1:24000),sum(cumsum(Mode_11(:,1:12).^2*Qi_R{11}+3e-5*Mode_11(:,end-1).^2),2),'LineWidth',1.5); 
 plot(Tau(1:24000),sum(cumsum(R5e_5(:,1:12).^2*Qi_R{11}+5e-5*R5e_5(:,end-1).^2),2),'LineWidth',1.5); 
-legend({'$R=5\times 10^{-6}$','$R=7.5\times 10^{-6}$','$R=1\times 10^{-5}$', '$R=2\times 10^{-5}$', '$R=3\times 10^{-5}$','$R=5\times 10^{-5}$'},'Location','northwest','Interpreter', 'latex')
-ylabel('J, LQR cost function','Interpreter','latex','FontSize',16)
+legend({'$R_\mathrm{LQR}=5\times 10^{-6}$','$R_\mathrm{LQR}=7.5\times 10^{-6}$','$R_\mathrm{LQR}=1\times 10^{-5}$', '$R_\mathrm{LQR}=2\times 10^{-5}$', '$R_\mathrm{LQR}=3\times 10^{-5}$','$R_\mathrm{LQR}=5\times 10^{-5}$'},'Location','best','Interpreter', 'latex')
+ylabel('$J$, LQR cost function','Interpreter','latex','FontSize',16)
 xlabel('$\tau$','FontSize',16, Interpreter='latex')
 xlim([0 30])
 ylim([0 4.5e-4])

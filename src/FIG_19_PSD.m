@@ -35,11 +35,11 @@ end
 ax1 = nexttile(t);
 hold(ax1,'on')
 colororder(ax1, cmap(1:2,:))
-plot(ax1, St_c{1}, 20*log10(pxx{1}),'-.', 'LineWidth', 1.5);
-plot(ax1, St_c{2}, 20*log10(pxx{2}), 'LineWidth', 1.5);
+plot(ax1, St_c{1}, 20*log10(pxx{1}),'-', 'LineWidth', 1.5);
+plot(ax1, St_c{2}, 20*log10(pxx{2}),'-.', 'LineWidth', 1.5);
 grid(ax1,'on')
-xlabel(ax1,'Strouhal number, St')
-ylabel(ax1,'PSD/St')
+xlabel(ax1,'Strouhal number, $St$',Interpreter='latex')
+ylabel(ax1,'PSD/$St$',Interpreter='latex')
 legend(ax1, labels(1:2), 'Location', 'best','FontSize',12)
 xlim(ax1,[0 1.4])
 ylim(ax1,[-200 50])
@@ -47,11 +47,11 @@ ylim(ax1,[-200 50])
 ax2 = nexttile(t);
 hold(ax2,'on')
 colororder(ax2, cmap(3:4,:))
-plot(ax2, St_c{3}, 20*log10(pxx{3}),'-.', 'LineWidth', 1.5);
-plot(ax2, St_c{4}, 20*log10(pxx{4}), 'LineWidth', 1.5);
+plot(ax2, St_c{3}, 20*log10(pxx{3}),'-', 'LineWidth', 1.5);
+plot(ax2, St_c{4}, 20*log10(pxx{4}),'-.', 'LineWidth', 1.5);
 grid(ax2,'on')
-xlabel(ax2,'Strouhal number, St')
-ylabel(ax2,'PSD/St')
+xlabel(ax2,'Strouhal number, $St$', Interpreter='latex')
+ylabel(ax2,'PSD/$St$', Interpreter='latex')
 legend(ax2, labels(3:4), 'Location', 'best','FontSize',12)
 xlim(ax2,[0 1.4])
 ylim(ax2,[-200 50])

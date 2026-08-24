@@ -29,7 +29,7 @@ colororder([ ...
     ]);
 
 xlim([2e-2 2]);
-xlabel( 'Strouhal number, $\mathrm{St}$', 'Interpreter','latex', 'FontSize',16);
+xlabel( 'Strouhal number, $St$', 'Interpreter','latex', 'FontSize',16);
 ylabel('Magnitude, $|G(e^{j\varphi})|$ (dB)', 'Interpreter','latex', 'FontSize',16);
 legend('show', 'FontSize', 12, 'Location','northeast');
 axs = findall(gcf,'Type','axes');
