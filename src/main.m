@@ -4,10 +4,7 @@
 clc; close all;
 addpath utils\;
 addpath simulink\;
-datpath = '..\data\';
-figpath = '..\figures\';
-udfpath = '..\C\';
-load([datpath,'train.mat']);
+load('train.mat');
 set(groot,'defaultAxesTickLabelInterpreter','latex');
 set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');

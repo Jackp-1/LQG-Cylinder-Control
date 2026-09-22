@@ -43,7 +43,7 @@ axis2.Position = [left bottom ax_width ax_height];
 
 ax3 = nexttile(t);
 hold on;
-plot(Tau(1:102298),([zeros(22298,1); SRS_Control(:,end-1)].^2*0.05)/(U_inf^2),'LineWidth',1);
+plot(Tau(1:102298),([zeros(22298,1); SRS_Control(:,end-1)].^2*0.1)/(U_inf^2),'LineWidth',1);
 ylabel('$C_\mu$',Interpreter='latex',fontsize=16)
 xlabel('$\tau$',Interpreter='latex',fontsize=16)
 xlim([0 85])
