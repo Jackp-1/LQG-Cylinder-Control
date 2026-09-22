@@ -1,9 +1,10 @@
 %% Cylinder Post Processing
 
 %% Initialise Data
-clc; close all;
+clc; close all; clear all;
 addpath utils\;
 addpath simulink\;
+addpath data\;
 load('train.mat');
 set(groot,'defaultAxesTickLabelInterpreter','latex');
 set(groot,'defaulttextinterpreter','latex');
@@ -20,7 +21,7 @@ U_inf = 0.01460734693878; %Freestream velocity
 q = 0.5*1.225*U_inf^2; %Dynamic Head
 Ts = 0.4;  %Sampling time
 fs=1/Ts;
-t=0:Ts:Ts*100000-Ts;
+t=0:Ts:Ts*200000-Ts;
 f_shed=0.00305176;
 Tau = t*f_shed;
 ReadData

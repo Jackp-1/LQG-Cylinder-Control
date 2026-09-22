@@ -125,4 +125,4 @@ set(axs, ...
 ax1.YLabel.Units = 'normalized';
 ax2.YLabel.Units = 'normalized';
 
-exportgraphics(gcf,"Fig6.eps","ContentType","vector")
+exportgraphics(gcf,"figures\Fig6.eps","ContentType","vector")

@@ -59,4 +59,4 @@ xlabel(ax2,'$\tau$','Interpreter','latex');
 ax1.YLabel.Units = 'normalized';
 ax2.YLabel.Units = 'normalized';
 
-exportgraphics(gcf,"Fig3.eps","ContentType","vector")
+exportgraphics(gcf,"figures\Fig3.eps","ContentType","vector")

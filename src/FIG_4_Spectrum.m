@@ -85,4 +85,4 @@ set(axs, ...
 
 set(ax2,'Layer','top')
 
-exportgraphics(gcf,"Fig4.eps","ContentType","vector")
+exportgraphics(gcf,"figures\Fig4.eps","ContentType","vector")

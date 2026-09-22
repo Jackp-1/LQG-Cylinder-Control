@@ -5,7 +5,7 @@ PSD{3} = SRS_Base_Lift(:,2) / (2*q);
 PSD{4} = SRS_Control(4000:end,end-5) / (2*q);
 St_c = cell(1,4);
 fs = 1/0.4;
-labels = {'uRANS Off','uRANS On','DDES Off','DDES On'};
+labels = {'URANS Off','URANS On','DDES Off','DDES On'};
 
 fig = figure('Color','w', ...
     'Units','pixels', ...
