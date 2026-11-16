@@ -5,7 +5,9 @@ cd_raw = [Base_drag(1:8000,2); Ref_Tracking(:,end)] / q;
 cm_raw = [zeros(8000,1); Ref_Tracking(:,end-1)] / U_inf;
 
 tau = Tau(1:numel(cl_raw));
+idx_c = 8000;
 
+Tau_c = tau-tau(idx_c);
 mov1 = movmean(Base_lift(1:8000,2)/q, 775);
 mov2 = movmean(Ref_Tracking(1:39300,13)/q, 831);
 mov3 = movmean(Ref_Tracking(39301:end,13)/q, 770);
@@ -29,11 +31,10 @@ clr3 = [0/255   200/255   0/255];
 
 ax1 = nexttile(t);
 hold(ax1, 'on');
-plot(ax1, tau, cl_raw, 'Color', clr1, 'LineWidth', lw);
-plot(ax1, tau, ref,    'Color', clr2, 'LineWidth', lw);
-plot(ax1, tau, mov,    'Color', clr3, 'LineStyle', '-.', 'LineWidth', lw);
+plot(ax1, Tau_c, cl_raw, 'Color', clr1, 'LineWidth', lw);
+plot(ax1, Tau_c, ref,    'Color', clr2, 'LineWidth', lw);
+plot(ax1, Tau_c, mov,    'Color', clr3, 'LineStyle', '-.', 'LineWidth', lw);
 
-xlim(ax1, [0 80]);
 ylim(ax1, [-1.2 1.2]);
 ylabel(ax1, '$C_\mathrm{l}$', 'Interpreter','latex', 'FontSize', fs);
 legend(ax1, {'$C_\mathrm{l}$','$C_\mathrm{l,ref}$','$\tilde{C}_\mathrm{l}$'}, ...
@@ -42,21 +43,24 @@ legend(ax1, {'$C_\mathrm{l}$','$C_\mathrm{l,ref}$','$\tilde{C}_\mathrm{l}$'}, ..
     'Location','northeast', ...
     'Box','on');
 grid(ax1, 'on');
-box(ax1, 'off');
 
 ax2 = nexttile(t);
 hold(ax2, 'on');
 plot(ax2, tau, cd_raw, 'Color', clr1, 'LineWidth', lw);
-plot(tau,ones(1,69349)*Min_drag/q,'k-.','LineWidth',1.5)
-plot(tau,ones(1,69349)*Mean_Base_Drag/q,'r-.','LineWidth',1.5)
+yline(ax2,Mean_Base_Drag/q,'-.', ...
+    'Color',[1 0 0], ...
+    'LineWidth',1.8, ...
+    'HandleVisibility','off');
+yline(ax2,Min_drag/q,'-.', ...
+    'Color',[0 0 0], ...
+    'LineWidth',1.8, ...
+    'HandleVisibility','off');
 
-xlim(ax2, [0 80]);
 ylim(ax2, [0.6 1.4])
 ylabel(ax2, '$C_\mathrm{d}$', 'Interpreter','latex', 'FontSize', fs);
 grid(ax2, 'on');
-box(ax2, 'off');
 text(ax2, ...
-    0.15, 0.97,'$\bar{C}_\mathrm{d,base}$', ...
+    0.15, 0.97,'$\langle C_\mathrm{d,base} \rangle$', ...
     'Units','normalized', ...
     'FontName','Times New Roman', ...
     'FontSize',18, ...
@@ -66,7 +70,7 @@ text(ax2, ...
     'VerticalAlignment','top')
 
 text(ax2, ...
-    0.03, 0.44, '$\bar{C}_\mathrm{d,min}$', ...
+    0.03, 0.44, '$\langle C_\mathrm{d,min} \rangle$', ...
     'Units','normalized', ...
     'FontName','Times New Roman', ...
     'FontSize',18, ...
@@ -77,18 +81,16 @@ text(ax2, ...
 
 ax3 = nexttile(t);
 hold(ax3, 'on');
-plot(ax3, tau, cm_raw, 'Color', clr1, 'LineWidth', lw);
+plot(ax3, Tau_c, cm_raw, 'Color', clr1, 'LineWidth', lw);
 
-xlim(ax3, [0 80]);
 ylim(ax3, [-1.4 1.4]);
 ylabel(ax3, '$u_\mathrm{c}/U_\infty$', 'Interpreter','latex', 'FontSize', fs);
 xlabel(ax3, '$\tau$', 'Interpreter','latex', 'FontSize', fs);
 grid(ax3, 'on');
-box(ax3, 'off');
 
 
 axs = [ax1 ax2 ax3];
-
+xlim(axs,'tight')
 set(axs, ...
     'FontName',      'Times New Roman', ...
     'FontSize',      18, ...
@@ -98,7 +100,8 @@ set(axs, ...
     'XMinorTick',    'on', ...
     'YMinorTick',    'on', ...
     'XScale',        'linear', ...
-    'Layer',         'bottom');
+    'Layer',         'bottom', ...
+    'box','on');
 
 ax1.XTickLabel = [];
 ax2.XTickLabel = [];
@@ -107,4 +110,4 @@ ax1.YLabel.Units = 'normalized';
 ax2.YLabel.Units = 'normalized';
 ax3.YLabel.Units = 'normalized';
 
-exportgraphics(gcf,"figures\Fig15.eps","ContentType","vector")
+exportgraphics(gcf,"figures\Fig15.pdf","ContentType","vector")

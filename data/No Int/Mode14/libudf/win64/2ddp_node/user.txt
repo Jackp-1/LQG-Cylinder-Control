@@ -1,6 +1,0 @@
-VERSION='2ddp_node'
-FLUENT_ARCH='win64'
-FLUENT_RELEASE='fluent24.1.0'
-CSOURCES=' $(SRC)Re1000_14mode.c'
-HSOURCES=''
-GPU_SUPPORT='off'

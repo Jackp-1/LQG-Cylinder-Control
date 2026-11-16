@@ -6,7 +6,7 @@ t = tiledlayout(fig, 1, 1, ...
     'TileSpacing','compact', ...
     'Padding','compact');
 ax1 = nexttile(t);
-idx_list = [5 8 11 15];
+idx_list = [15 11 8 5];
 % Frequency vector and figure/axes
 w = logspace(-4, 3, 30000);
 [~,~,wout] = bode(sys{idx_list(1)}, w);  % wout is rad/s
@@ -43,4 +43,4 @@ set(axs, ...
     'YMinorTick',    'on', ...
     'Layer',         'bottom');
 
-exportgraphics(gcf,"figures\Fig5.eps","ContentType","vector")
+exportgraphics(gcf,"figures\Fig5.pdf","ContentType","vector")

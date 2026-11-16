@@ -1,26 +1,26 @@
-x1_avg_base=sortrows(readmatrix([datpath, 'x1_u_avg_base.csv']),2);
+x1_avg_base=sortrows(readmatrix('x1_u_avg_base.csv'),2);
 x1_avg_base(:,1) = x1_avg_base(:,1)/U_inf;
-x15_avg_base=sortrows(readmatrix([datpath, 'x15_u_avg_base.csv']),2);
+x15_avg_base=sortrows(readmatrix('x15_u_avg_base.csv'),2);
 x15_avg_base(:,1) = x15_avg_base(:,1)/U_inf;
-x2_avg_base=sortrows(readmatrix([datpath, 'x2_u_avg_base.csv']),2);
+x2_avg_base=sortrows(readmatrix('x2_u_avg_base.csv'),2);
 x2_avg_base(:,1) = x2_avg_base(:,1)/U_inf;
-x25_avg_base=sortrows(readmatrix([datpath, 'x25_u_avg_base.csv']),2);
+x25_avg_base=sortrows(readmatrix('x25_u_avg_base.csv'),2);
 x25_avg_base(:,1) = x25_avg_base(:,1)/U_inf;
-x3_avg_base=sortrows(readmatrix([datpath, 'x3_u_avg_base.csv']),2);
+x3_avg_base=sortrows(readmatrix('x3_u_avg_base.csv'),2);
 x3_avg_base(:,1) = x3_avg_base(:,1)/U_inf;
-x1_avg_control=sortrows(readmatrix([datpath, 'x1_u_avg_control.csv']),2);
+x1_avg_control=sortrows(readmatrix('x1_u_avg_control.csv'),2);
 x1_avg_control(:,1) = x1_avg_control(:,1)/U_inf;
-x15_avg_control=sortrows(readmatrix([datpath, 'x15_u_avg_control.csv']),2);
+x15_avg_control=sortrows(readmatrix('x15_u_avg_control.csv'),2);
 x15_avg_control(:,1) = x15_avg_control(:,1)/U_inf;
-x2_avg_control=sortrows(readmatrix([datpath, 'x2_u_avg_control.csv']),2);
+x2_avg_control=sortrows(readmatrix('x2_u_avg_control.csv'),2);
 x2_avg_control(:,1) = x2_avg_control(:,1)/U_inf;
-x25_avg_control=sortrows(readmatrix([datpath, 'x25_u_avg_control.csv']),2);
+x25_avg_control=sortrows(readmatrix('x25_u_avg_control.csv'),2);
 x25_avg_control(:,1) = x25_avg_control(:,1)/U_inf;
-x3_avg_control=sortrows(readmatrix([datpath, 'x3_u_avg_control.csv']),2);
+x3_avg_control=sortrows(readmatrix('x3_u_avg_control.csv'),2);
 x3_avg_control(:,1) = x3_avg_control(:,1)/U_inf;
-Theta_Cp_Base=readmatrix([datpath, 'Theta_Cp_Base.csv']);
+Theta_Cp_Base=readmatrix('Theta_Cp_Base.csv');
 Theta_Cp_Base = sortrows(Theta_Cp_Base,1);
-Theta_Cp_Control=readmatrix([datpath, 'Theta_Cp_Control.csv']);
+Theta_Cp_Control=readmatrix('Theta_Cp_Control.csv');
 Theta_Cp_Control = sortrows(Theta_Cp_Control,1);
 
 
@@ -72,69 +72,64 @@ text(ax1,0.392565-.03,0,'Actuation Slot', ...
     'HorizontalAlignment','center', ...
     'VerticalAlignment','middle');
 annotation("doublearrow",[0.245,0.245],[0.2,0.33])
-text(-0.23,-0.95,'$\Delta C_{p,b}~~ 44.5\%$','FontSize',14,Interpreter='latex')
+text(-0.28,-0.95,'$\Delta \langle C_{p,b} \rangle~~ 44.5\%$','FontSize',14,Interpreter='latex')
 legend({'Baseline','','','Control'}, ...
     'Interpreter','latex', ...
     'FontSize', 12, ...
     'Location','northwest', ...
     'Box','on');
 grid on;
-box(ax1, 'off');
 xlabel('$\theta/\pi$','Interpreter','latex',fontsize=16)
-ylabel('$C_p$','Interpreter','latex',fontsize=16)
+ylabel('$\langle C_p \rangle$','Interpreter','latex',fontsize=16)
 
 ax2 = nexttile(t);
 plot(x1_avg_base(:,1),x1_avg_base(:,2),'-k','LineWidth',1.5); hold on;
 plot(x1_avg_control(:,1),x1_avg_control(:,2),'-.r','LineWidth',1.5);
 xlim([-0.5 2])
-ylim([0 1.5])
+%ylim([0 1.5])
 title('$x/D=1$','FontSize',14,'Interpreter','latex')
 ylabel('$y/D$','FontSize',14,Interpreter='latex')
 xlabel('$u/U_\infty$','FontSize', 14,'Interpreter','latex')
 grid on;
-box(ax2, 'off');
 
 ax3 = nexttile(t);
 plot(x15_avg_base(:,1),x15_avg_base(:,2),'-k','LineWidth',1.5); hold on
 plot(x15_avg_control(:,1),x15_avg_control(:,2),'-.r','LineWidth',1.5);
 xlim([-0.5 2])
-ylim([0 1.5])
+%ylim([0 1.5])
 title('$x/D=1.5$','FontSize',14,'Interpreter','latex')
 xlabel('$u/U_\infty$','FontSize', 14,'Interpreter','latex')
 grid on;
-box(ax3, 'off');
-
 ax4 = nexttile(t);
 plot(x2_avg_base(:,1),x2_avg_base(:,2),'-k','LineWidth',1.5); hold on
 plot(x2_avg_control(:,1),x2_avg_control(:,2),'-.r','LineWidth',1.5);
 xlim([-0.5 2])
-ylim([0 1.5])
+%ylim([0 1.5])
 title('$x/D=2$','FontSize',14,'Interpreter','latex')
 xlabel('$u/U_\infty$','FontSize', 14,'Interpreter','latex')
 grid on;
-box(ax4, 'off');
 
 ax5 = nexttile(t);
 plot(x25_avg_base(:,1),x25_avg_base(:,2),'-k','LineWidth',1.5); hold on
 plot(x25_avg_control(:,1),x25_avg_control(:,2),'-.r','LineWidth',1.5);
 xlim([-0.5 2])
-ylim([0 1.5])
+%ylim([0 1.5])
 title('$x/D=2.5$','FontSize',14,'Interpreter','latex')
 xlabel('$u/U_\infty$','FontSize', 14,'Interpreter','latex')
 grid on;
-box(ax5, 'off');
 
 ax6 = nexttile(t);
 plot(x3_avg_base(:,1),x3_avg_base(:,2),'-k','LineWidth',1.5); hold on
 plot(x3_avg_control(:,1),x3_avg_control(:,2),'-.r','LineWidth',1.5);
 xlim([-0.5 2])
-ylim([0 1.5])
+%ylim([0 1.5])
 title('$x/D=3$','FontSize',14,'Interpreter','latex')
 xlabel('$u/U_\infty$','FontSize', 14,'Interpreter','latex')
 grid on;
-box(ax6, 'off');
 
 axs = [ax1 ax2 ax3 ax4 ax5 ax6];
+axs2 =  [ax2 ax3 ax4 ax5 ax6];
+ylim(axs2,[0 2])
 set(axs, ...
     'FontName',      'Times New Roman', ...
     'FontSize',      12, ...
@@ -144,6 +139,7 @@ set(axs, ...
     'XMinorTick',    'on', ...
     'YMinorTick',    'on', ...
     'XScale',        'linear', ...
-    'Layer',         'bottom');
+    'Layer',         'bottom', ...
+    'box','on');
 
-exportgraphics(gcf,"figures\Fig12.eps","ContentType","vector")
+exportgraphics(gcf,"figures\Fig12.pdf","ContentType","vector")

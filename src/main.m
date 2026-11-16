@@ -101,7 +101,7 @@ switch n
         for r = truncation_range
             close all
             Q=(CLQR{r}'*CLQR{r}); %State penalty Regulator
-            Qi = 0;
+            Qi = 1e-6;
             Qi_R{r} = blkdiag(Q,Qi); %Integral action penalty
             R = 2e-5; %Actuation penalty Regulator
             W = 1; % process covariance Kalman filter

@@ -7,49 +7,46 @@ t = tiledlayout(fig, 3, 1, ...
     'TileSpacing','compact', ...
     'Padding','compact');
 ax1 = nexttile(t);
-plot(Tau(1:73001),SRS_Base_Lift(7000:80000,2)/(q*2),'LineWidth',1); % q*2 to account for spanwise length
+idx_c = 22298;
+
+Tau_c = Tau-Tau(idx_c);
+
+plot(Tau_c(1:73001),SRS_Base_Lift(7000:80000,2)/(q*2),'LineWidth',1); % q*2 to account for spanwise length
 hold on;
-plot(Tau(1:102298),[SRS_Base_Lift(7000:29297,2); SRS_Control(:,13)]/(q*2),'LineWidth',1);
+plot(Tau_c(1:102298),[SRS_Base_Lift(7000:29297,2); SRS_Control(:,13)]/(q*2),'LineWidth',1);
 grid on
 ylabel('$C_\mathrm{l}$',Interpreter='latex',fontsize=16)
 legend('Base','Feedback',Interpreter='latex',fontsize=12, location='northwest')
-xlim([0 85])
 ylim([-1.2 1.2])
 
-axis1=gca;
-outerpos = axis1.OuterPosition;
-ti = axis1.TightInset;
-left = outerpos(1) + ti(1);
-bottom = outerpos(2) + ti(2);
-ax_width = outerpos(3) - ti(1) - ti(3);
-ax_height = outerpos(4) - ti(2) - ti(4);
-axis1.Position = [left bottom ax_width ax_height];
 
 ax2 = nexttile(t);
-plot(Tau(1:73001),SRS_Base_Drag(7000:80000,2)/(q*2),'LineWidth',1);
+plot(Tau_c(1:73001),SRS_Base_Drag(7000:80000,2)/(q*2),'LineWidth',1);
 hold on;
-plot(Tau(1:102298),[SRS_Base_Drag(7000:29297,2); SRS_Control(:,end)]/(q*2),'LineWidth',1);
-plot(Tau(1:73001),ones(1,73001)*1.07,'r-.','LineWidth',1.5)
+plot(Tau_c(1:102298),[SRS_Base_Drag(7000:29297,2); SRS_Control(:,end)]/(q*2),'LineWidth',1);
+%plot(Tau(1:73001),ones(1,73001)*1.07,'r-.','LineWidth',1.5)
+yline(ax2,1.07,'-.', ...
+    'Color',[1 0 0], ...
+    'LineWidth',1.8, ...
+    'HandleVisibility','off');
+%yline(ax2,Min_drag/q,'-.', ...
+%    'Color',[0 0 0], ...
+%    'LineWidth',1.8, ...
+%    'HandleVisibility','off');
 ylabel('$C_\mathrm{d}$',Interpreter='latex',fontsize=16)
 grid on
-xlim([0 85])
 ylim([0.7 1.4])
 
-axis2=gca;
-outerpos = axis2.OuterPosition;
-ti = axis2.TightInset;
-bottom = outerpos(2) + ti(2);
-axis2.Position = [left bottom ax_width ax_height];
 
 ax3 = nexttile(t);
 hold on;
-plot(Tau(1:102298),([zeros(22298,1); SRS_Control(:,end-1)].^2*0.1)/(U_inf^2),'LineWidth',1);
+plot(Tau_c(1:102298),([zeros(22298,1); SRS_Control(:,end-1)].^2*0.1)/(U_inf^2),'LineWidth',1);
 ylabel('$C_\mu$',Interpreter='latex',fontsize=16)
 xlabel('$\tau$',Interpreter='latex',fontsize=16)
-xlim([0 85])
 grid on
 text(ax2, ...
-    0.18, 0.75,'$\bar{C}_\mathrm{d,base,3d}$', ...
+    0.18, 0.75,'$\langle C_\mathrm{d,base,3d} \rangle$', ...
+    'Interpreter','latex',...
     'Units','normalized', ...
     'FontName','Times New Roman', ...
     'FontSize',18, ...
@@ -57,13 +54,8 @@ text(ax2, ...
     'FontWeight','bold', ...
     'HorizontalAlignment','left', ...
     'VerticalAlignment','top')
-
-axis3=gca;
-outerpos = axis3.OuterPosition;
-ti = axis3.TightInset;
-bottom = outerpos(2) + ti(2);
-axis3.Position = [left bottom ax_width ax_height];
-axs = [ax1 ax2 ax3];
+axs=[ax1 ax2 ax3];
+xlim(axs,[-27.218 61.8934])
 colororder([ ...
     0/255 0/255 0/255;    ...
     230/255 20/255   0/255;    ...
@@ -82,7 +74,7 @@ set(axs, ...
     'YMinorTick',    'on', ...
     'XScale',        'linear', ...
     'Layer',         'bottom', ...
-    'Box','off');
+    'Box','on');
 
 ax1.XTickLabel = [];
 ax2.XTickLabel = [];
@@ -91,4 +83,4 @@ ax1.YLabel.Units = 'normalized';
 ax2.YLabel.Units = 'normalized';
 ax3.YLabel.Units = 'normalized';
 
-exportgraphics(gcf,"figures\Fig18.eps","ContentType","vector")
+exportgraphics(gcf,"figures\Fig18.pdf","ContentType","vector")

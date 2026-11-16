@@ -1,0 +1,63 @@
+fig = figure('Color','w', ...
+             'Units','pixels', ...
+             'Position',[50 50 1250 400], ...
+             'Renderer','painters');
+
+t = tiledlayout(fig, 2, 1, ...
+    'TileSpacing','compact', ...
+    'Padding','compact');
+
+fs  = 16;
+lw  = 1.6;
+clr1 = [0 0 0];
+clr2 = [230/255 20/255   0/255];
+clr3 = [0/255   200/255   0/255];
+
+idx_c = find(U ~= 0, 1, 'first');
+
+Tau_c = Tau-Tau(idx_c);
+
+ax1 = nexttile(t);
+hold(ax1, 'on');
+plot(Tau_c(1:size(Train_lift,1)),Train_lift(:,2)/q, 'Color', clr1, 'LineWidth', lw); 
+plot(Tau_c(1:size(Train_lift,1)),(sys{r}.C*x_train{r}/q),'Color', clr2, 'LineWidth', lw,'LineStyle','--')
+grid(ax1, 'on');
+
+ylim([-1.2 1.2])
+ylabel('$C_\mathrm{l}$','Interpreter','latex','Rotation',90)
+legend('uRANS','ROM', ...
+    'Interpreter','latex', ...
+    'FontSize', 12, ...
+    'Location','northwest', ...
+    'Box','on');
+
+ax2 = nexttile(t);
+hold(ax2, 'on');
+plot(Tau_c(1:size(Train_lift,1)),(2*U.^2*0.05)/(U_inf^2), 'Color', clr1, 'LineWidth', lw);
+xlabel('$\tau$','Interpreter','latex')
+ylabel('$C_\mu$','Interpreter','latex','Rotation',90)
+grid(ax2, 'on');
+
+axs = [ax1 ax2];
+
+set(axs, ...
+    'FontName','Times New Roman', ...
+    'FontSize',18, ...
+    'LineWidth',1, ...
+    'TickDir','in', ...
+    'TickLabelInterpreter','latex', ...
+    'XMinorTick','on', ...
+    'YMinorTick','on', ...
+    'XScale','linear', ...
+    'Layer','bottom');
+
+xticklabels(ax1,[]);
+xticks(ax2,[0 1 2 3 4 5])
+%xlim(ax1, [0 5])
+%xlim(ax2, [0 5])
+xlabel(ax2,'$\tau$','Interpreter','latex');
+
+ax1.YLabel.Units = 'normalized';
+ax2.YLabel.Units = 'normalized';
+
+exportgraphics(gcf,"figures\Fig3.eps","ContentType","vector")

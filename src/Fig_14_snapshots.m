@@ -1,5 +1,5 @@
 Di=1;
-dat=readmatrix([datpath,'Re1000_control_R75e-7_data']);
+dat=readmatrix('Re1000_control_R75e-7_data');
 Xdat2 = dat(:,2);
 Ydat2 = dat(:,3);
 % Load training data
@@ -18,7 +18,7 @@ Ydat2(Xdat2 >= Di*6,:) =[];
 Xdat2(Xdat2 >= Di*6,:) =[];
 Data_control=dat;
 
-dat=readmatrix([datpath,'Re1000_base_data']);
+dat=readmatrix('Re1000_base_data');
 Xdat3 = dat(:,2);
 Ydat3 = dat(:,3);
 % Load training data
@@ -148,7 +148,7 @@ for k = 1:4
             opt.RecircLabels{k});
     end
 
-    text(ax, 0.02, 0.94, opt.PanelLabels{k}, ...
+    text(ax, 0, 1.15, opt.PanelLabels{k}, ...
         'Units', 'normalized', ...
         'Interpreter', 'latex', ...
         'FontName', 'Times New Roman', ...
@@ -236,4 +236,4 @@ if nargin >= 5 && ~isempty(labelStr)
 end
 end
 
-exportgraphics(gcf,"figures\Fig14.eps","ContentType","vector")
+exportgraphics(gcf,"figures\Fig14.pdf","ContentType","vector")

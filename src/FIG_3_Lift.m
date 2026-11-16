@@ -13,12 +13,15 @@ clr1 = [0 0 0];
 clr2 = [230/255 20/255   0/255];
 clr3 = [0/255   200/255   0/255];
 
+idx_c = find(U ~= 0, 1, 'first');
+
+Tau_c = Tau-Tau(idx_c);
+
 ax1 = nexttile(t);
 hold(ax1, 'on');
-plot(Tau(1:size(Train_lift,1)),Train_lift(:,2)/q, 'Color', clr1, 'LineWidth', lw); 
-plot(Tau(1:size(Train_lift,1)),(sys{r}.C*x_train{r}/q),'Color', clr2, 'LineWidth', lw,'LineStyle','--')
+plot(Tau_c(1:size(Train_lift,1)),Train_lift(:,2)/q, 'Color', clr1, 'LineWidth', lw); 
+plot(Tau_c(1:size(Train_lift,1)),(sys{r}.C*x_train{r}/q),'Color', clr2, 'LineWidth', lw,'LineStyle','--')
 grid(ax1, 'on');
-box(ax1, 'off');
 
 ylim([-1.2 1.2])
 ylabel('$C_\mathrm{l}$','Interpreter','latex','Rotation',90)
@@ -30,15 +33,13 @@ legend('uRANS','ROM', ...
 
 ax2 = nexttile(t);
 hold(ax2, 'on');
-plot(Tau(1:size(Train_lift,1)),(2*U.^2*0.05)/(U_inf^2), 'Color', clr1, 'LineWidth', lw);
-xlim([0 5])
+plot(Tau_c(1:size(Train_lift,1)),(2*U.^2*0.05)/(U_inf^2), 'Color', clr1, 'LineWidth', lw);
 xlabel('$\tau$','Interpreter','latex')
 ylabel('$C_\mu$','Interpreter','latex','Rotation',90)
 grid(ax2, 'on');
-box(ax2, 'off');
 
 axs = [ax1 ax2];
-
+xlim(axs,'tight')
 set(axs, ...
     'FontName','Times New Roman', ...
     'FontSize',18, ...
@@ -48,15 +49,15 @@ set(axs, ...
     'XMinorTick','on', ...
     'YMinorTick','on', ...
     'XScale','linear', ...
-    'Layer','bottom');
+    'Layer','bottom', ...
+    'box','on');
 
+xticks(ax1,[-2.5 -1.5 0 1.5 2.5]);
 xticklabels(ax1,[]);
-xticks(ax2,[0 1 2 3 4 5])
-xlim(ax1, [0 5])
-xlim(ax2, [0 5])
+xticks(ax2,[-2.5 -1.5 0 1.5 2.5])
 xlabel(ax2,'$\tau$','Interpreter','latex');
 
 ax1.YLabel.Units = 'normalized';
 ax2.YLabel.Units = 'normalized';
 
-exportgraphics(gcf,"figures\Fig3.eps","ContentType","vector")
+exportgraphics(gcf,"figures\Fig3.pdf","ContentType","vector")

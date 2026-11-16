@@ -13,28 +13,39 @@ clr1 = [0 0 0];
 clr2 = [230/255 20/255   0/255];
 clr3 = [0/255   200/255   0/255];
 
+idx_c = 8000;
+
+Tau_c = Tau-Tau(idx_c);
+
 ax1 = nexttile(t);
 hold(ax1, 'on');
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);Lift_constant_quarter(:,2)]./q,'LineWidth',1.5); 
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);Lift_constant_half(:,2)]./q,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);Lift_constant_average(:,2)]./q,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);Lift_constant_double(:,2)]./q,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);Mode_11(:,end-5)]./q,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);Lift_constant_quarter(:,2)]./q,'LineWidth',1.5); 
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);Lift_constant_half(:,2)]./q,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);Lift_constant_average(:,2)]./q,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);Lift_constant_double(:,2)]./q,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);Mode_11(:,end-5)]./q,'LineWidth',1.5);
 grid on
-box(ax1, 'off');
 ylabel('$C_\mathrm{l}$','Interpreter','latex', FontSize=16)
-xlim([0 39])
+%xlim([0 39])
 ylim([-1.2 1.2])
 
 ax2 = nexttile(t);
 hold(ax2, 'on');
-plot(Tau(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[Base_drag(1:8000,2);Drag_constant_quarter(:,2)]./q,'LineWidth',1.5); 
-plot(Tau(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[Base_drag(1:8000,2);Drag_constant_half(:,2)]./q,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[Base_drag(1:8000,2);Drag_constant_average(:,2)]./q,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[Base_drag(1:8000,2);Drag_constant_double(:,2)]./q,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Drag_constant_average(:,2)],1)),[Base_drag(1:8000,2);Mode_11(:,end)]./q,'LineWidth',1.5);
-plot(Tau(1:69349),ones(1,69349)*Min_drag/q,'k-.','LineWidth',1.5)
-plot(Tau(1:69349),ones(1,69349)*Mean_Base_Drag/q,'r-.','LineWidth',1.5)
+plot(Tau_c(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[Base_drag(1:8000,2);Drag_constant_quarter(:,2)]./q,'LineWidth',1.5); 
+plot(Tau_c(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[Base_drag(1:8000,2);Drag_constant_half(:,2)]./q,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[Base_drag(1:8000,2);Drag_constant_average(:,2)]./q,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[Base_drag(1:8000,2);Drag_constant_double(:,2)]./q,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Drag_constant_average(:,2)],1)),[Base_drag(1:8000,2);Mode_11(:,end)]./q,'LineWidth',1.5);
+yline(ax2,Mean_Base_Drag/q,'-.', ...
+    'Color',[1 0 0], ...
+    'LineWidth',1.8, ...
+    'HandleVisibility','off');
+yline(ax2,Min_drag/q,'-.', ...
+    'Color',[0 0 0], ...
+    'LineWidth',1.8, ...
+    'HandleVisibility','off');
+%plot(Tau_c(1:69349),ones(1,69349)*Min_drag/q,'k-.','LineWidth',1.5)
+%plot(Tau_c(1:69349),ones(1,69349)*Mean_Base_Drag/q,'r-.','LineWidth',1.5)
 
 colororder([ ...
     0/255 0/255 0/255;    ...
@@ -46,13 +57,12 @@ colororder([ ...
     ]);
 
 grid(ax2, 'on');
-box(ax2, 'off');
 ylabel('$C_\mathrm{d}$','Interpreter','latex', FontSize=16)
-xlim([0 39])
+%xlim([0 39])
 ylim([0.7 1.4])
 
 text(ax2, ...
-    0.1, 0.95,'$\bar{C}_\mathrm{d,base}$', ...
+    0.1, 0.95,'$\langle C_\mathrm{d,base} \rangle$', ...
     'Units','normalized', ...
     'FontName','Times New Roman', ...
     'FontSize',18, ...
@@ -62,7 +72,7 @@ text(ax2, ...
     'HorizontalAlignment','left', ...
     'VerticalAlignment','top')
 text(ax2, ...
-    0.03, 0.32, '$\bar{C}_\mathrm{d,min}$', ...
+    0.03, 0.32, '$\langle C_\mathrm{d,min} \rangle$', ...
     'Units','normalized', ...
     'FontName','Times New Roman', ...
     'FontSize',18, ...
@@ -73,25 +83,24 @@ text(ax2, ...
 
 ax3 = nexttile(t);
 hold(ax3, 'on');
-plot(Tau(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[zeros(8000,1);ones(length(Drag_constant_quarter),1)*0.0143/4],'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[zeros(8000,1);ones(length(Drag_constant_quarter),1)*0.0143/2],'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[zeros(8000,1);ones(length(Drag_constant_quarter),1)*0.0143],'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[zeros(8000,1);ones(length(Drag_constant_quarter),1)*0.0143*2],'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),(2*[zeros(8000,1);Mode_11(:,end-1)].^2*0.05)./U_inf^2,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[zeros(8000,1);ones(length(Drag_constant_quarter),1)*0.0143/4],'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[zeros(8000,1);ones(length(Drag_constant_quarter),1)*0.0143/2],'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[zeros(8000,1);ones(length(Drag_constant_quarter),1)*0.0143],'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),[zeros(8000,1);ones(length(Drag_constant_quarter),1)*0.0143*2],'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Drag_constant_average(:,1)],1)),(2*[zeros(8000,1);Mode_11(:,end-1)].^2*0.05)./U_inf^2,'LineWidth',1.5);
 grid(ax3, 'on');
-box(ax3, 'off');
-legend({'$C_\mu=\bar{C}_\mu/4$','$C_\mu=\bar{C}_\mu/2$','$C_\mu=\bar{C}_\mu$', '$C_\mu=2\bar{C}_\mu$', 'Feedback, $R_\mathrm{LQR}=3\times 10^{-5}$'}, ...
+legend({'$C_\mu=\langle C_\mu \rangle /4$','$C_\mu=\langle C _\mu \rangle /2$','$C_\mu=\langle C_\mu \rangle$', '$C_\mu=2\langle C_\mu \rangle$', 'Feedback, $R_\mathrm{LQR}=3\times 10^{-5}$'}, ...
     'Interpreter','latex', ...
     'FontSize', 12, ...
     'Location','northwest', ...
     'Box','on');
 ylabel('$C_\mu$','Interpreter','latex', FontSize=16)
 xlabel('$\tau$','Interpreter','latex', FontSize=16)
-xlim([0 39])
+%xlim([0 39])
 ylim([0 0.15])
 
 axs = [ax1 ax2 ax3];
-
+xlim(axs,'tight')
 set(axs, ...
     'FontName',      'Times New Roman', ...
     'FontSize',      18, ...
@@ -101,7 +110,8 @@ set(axs, ...
     'XMinorTick',    'on', ...
     'YMinorTick',    'on', ...
     'XScale',        'linear', ...
-    'Layer',         'bottom');
+    'Layer',         'bottom', ...
+    'box','on');
 
 
 ax1.XTickLabel = [];
@@ -111,4 +121,4 @@ ax1.YLabel.Units = 'normalized';
 ax2.YLabel.Units = 'normalized';
 ax3.YLabel.Units = 'normalized';
 
-exportgraphics(gcf,"figures\Fig10.eps","ContentType","vector")
+exportgraphics(gcf,"figures\Fig10.pdf","ContentType","vector")

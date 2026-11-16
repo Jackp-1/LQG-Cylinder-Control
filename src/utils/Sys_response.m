@@ -52,7 +52,7 @@ opts.YLabel.FontSize = 13;
 opts.TickLabel.FontSize = 11;
 opts.Grid = 'on';
 
-if r == 12
+if r == 11
     % figure
     % margin(L_lqri); annotation('textbox',[.2 .25 .3 .3],'String','LQRi Margin','FitBoxToText','on')
     % set(gcf,'Position',[0 0 500 500])

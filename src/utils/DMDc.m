@@ -47,6 +47,7 @@ B = Upr' * X2 * Vr * (Sr \ U_2');
 
 Phi = real(X2*Vr*Sr^(-1)*U_1'*Upr*W);
 lambda = diag (D);
+%{
 omega = log ( lambda )/dt;
 % Compute DMD Solution
 x1 = X(:, 1);
@@ -58,5 +59,5 @@ for iter = 1: length (t)
 end
 X_dmd = Phi * time_dynamics ;
 
-
+%}
 end

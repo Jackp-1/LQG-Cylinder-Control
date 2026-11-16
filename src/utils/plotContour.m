@@ -42,7 +42,7 @@ if val~=0
         [~,col]=min(abs(X'-Xdat(val(i))));
         Col(i) = X(1,col(1));
         Row(i) = Y(row(1),1);
-        %scatter(col(1),row(1),50,"filled",'m','LineWidth',0.5,'MarkerEdgeColor','k'); hold on
+        scatter(col(1),row(1),50,"filled",'m','LineWidth',0.5,'MarkerEdgeColor','k'); hold on
     end
     Col
     Row

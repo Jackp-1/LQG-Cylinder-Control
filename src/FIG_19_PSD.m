@@ -39,7 +39,7 @@ plot(ax1, St_c{1}, 20*log10(pxx{1}),'-', 'LineWidth', 1.5);
 plot(ax1, St_c{2}, 20*log10(pxx{2}),'-.', 'LineWidth', 1.5);
 grid(ax1,'on')
 xlabel(ax1,'Strouhal number, $St$',Interpreter='latex')
-ylabel(ax1,'PSD/$St$',Interpreter='latex')
+ylabel(ax1,'PSD (dB)',Interpreter='latex')
 legend(ax1, labels(1:2), 'Location', 'best','FontSize',12)
 xlim(ax1,[0 1.4])
 ylim(ax1,[-200 50])
@@ -51,7 +51,7 @@ plot(ax2, St_c{3}, 20*log10(pxx{3}),'-', 'LineWidth', 1.5);
 plot(ax2, St_c{4}, 20*log10(pxx{4}),'-.', 'LineWidth', 1.5);
 grid(ax2,'on')
 xlabel(ax2,'Strouhal number, $St$', Interpreter='latex')
-ylabel(ax2,'PSD/$St$', Interpreter='latex')
+%ylabel(ax2,'PSD/$St$', Interpreter='latex')
 legend(ax2, labels(3:4), 'Location', 'best','FontSize',12)
 xlim(ax2,[0 1.4])
 ylim(ax2,[-200 50])
@@ -65,6 +65,6 @@ set([ax1 ax2], ...
     'YMinorTick', 'on', ...
     'XScale', 'linear', ...
     'Layer', 'bottom', ...
-    'Box', 'off');
+    'Box', 'on');
 
-exportgraphics(gcf,"Fig19.eps","ContentType","vector")
+exportgraphics(gcf,"figures\Fig19.pdf","ContentType","vector")

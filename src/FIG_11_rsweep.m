@@ -6,38 +6,46 @@ t = tiledlayout(fig, 3, 1, ...
     'TileSpacing','compact', ...
     'Padding','compact');
 
+idx_c = 8000;
+
+Tau_c = Tau-Tau(idx_c);
+
 ax1 = nexttile(t);
 hold(ax1, 'on');
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);R5e_6(:,end-5)]./q,'LineWidth',1.5, 'Color', [0/255 178/255 114/255 0.2]);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);R75e_7(:,end-5)]./q,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);R1e_5(:,end-5)]./q,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);Mode_11(:,end-5)]./q,'LineWidth',1.5); 
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);R5e_5(:,end-5)]./q,'LineWidth',1.5); 
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);R5e_6(:,end-5)]./q,'LineWidth',1.5, 'Color', [0/255 178/255 114/255 0.2]);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);R75e_7(:,end-5)]./q,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);R1e_5(:,end-5)]./q,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);Mode_11(:,end-5)]./q,'LineWidth',1.5); 
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_lift(1:8000,2);R5e_5(:,end-5)]./q,'LineWidth',1.5); 
 grid(ax1, 'on');
-box(ax1, 'off');
 ylabel('$C_\mathrm{l}$','Interpreter','latex', FontSize=16)
-xlim([0 39])
+%xlim([0 39])
 ylim([-1.2 1.2])
 
 
 ax2 = nexttile(t);
 hold(ax2, 'on');
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_drag(1:8000,2);R5e_6(:,end)]./q,'LineWidth',1.5, 'Color', [0/255 178/255 114/255 0.2]);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_drag(1:8000,2);R75e_7(:,end)]./q,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_drag(1:8000,2);R1e_5(:,end)]./q,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_drag(1:8000,2);Mode_11(:,end)]./q,'LineWidth',1.5); 
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_drag(1:8000,2);R5e_5(:,end)]./q,'LineWidth',1.5); 
-plot(Tau(1:32000),ones(1,32000)*Min_drag/q,'k-.','LineWidth',1.5)
-plot(Tau(1:32000),ones(1,32000)*Mean_Base_Drag/q,'r-.','LineWidth',1.5)
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_drag(1:8000,2);R5e_6(:,end)]./q,'LineWidth',1.5, 'Color', [0/255 178/255 114/255 0.2]);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_drag(1:8000,2);R75e_7(:,end)]./q,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_drag(1:8000,2);R1e_5(:,end)]./q,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_drag(1:8000,2);Mode_11(:,end)]./q,'LineWidth',1.5); 
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),[Base_drag(1:8000,2);R5e_5(:,end)]./q,'LineWidth',1.5); 
+yline(ax2,Mean_Base_Drag/q,'-.', ...
+    'Color',[1 0 0], ...
+    'LineWidth',1.8, ...
+    'HandleVisibility','off');
+yline(ax2,Min_drag/q,'-.', ...
+    'Color',[0 0 0], ...
+    'LineWidth',1.8, ...
+    'HandleVisibility','off');
 ylabel(ax2, '$C_\mathrm{d}$', 'Interpreter','latex', 'FontSize', fs);
 grid(ax2, 'on');
-box(ax2, 'off');
-xlim([0 39])
+%xlim([0 39])
 ylim([0.7 1.4])
 
 axis2=gca;
 text(axis2, ...
-    0.28, 0.91,'$\bar{C}_\mathrm{d,base}$', ...
+    0.28, 0.91,'$\langle C_\mathrm{d,base} \rangle$', ...
     'Units','normalized', ...
     'FontName','Times New Roman', ...
     'FontSize',18, ...
@@ -47,7 +55,7 @@ text(axis2, ...
     'VerticalAlignment','top')
 
 text(axis2, ...
-    0.03, 0.35, '$\bar{C}_\mathrm{d,min}$', ...
+    0.03, 0.35, '$\langle C_\mathrm{d,min} \rangle$', ...
     'Units','normalized', ...
     'FontName','Times New Roman', ...
     'FontSize',18, ...
@@ -58,15 +66,15 @@ text(axis2, ...
 
 ax3 = nexttile(t);
 hold(ax3, 'on');
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),(2*[zeros(8000,1);R5e_6(:,end-1)].^2*0.05)./U_inf^2,'LineWidth',1.5, 'Color', [0/255 178/255 114/255 0.2]);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),(2*[zeros(8000,1);R75e_7(:,end-1)].^2*0.05)./U_inf^2,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),(2*[zeros(8000,1);R1e_5(:,end-1)].^2*0.05)./U_inf^2,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),(2*[zeros(8000,1);Mode_11(:,end-1)].^2*0.05)./U_inf^2,'LineWidth',1.5);
-plot(Tau(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),(2*[zeros(8000,1);R5e_5(:,end-1)].^2*0.05)./U_inf^2,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),(2*[zeros(8000,1);R5e_6(:,end-1)].^2*0.05)./U_inf^2,'LineWidth',1.5, 'Color', [0/255 178/255 114/255 0.2]);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),(2*[zeros(8000,1);R75e_7(:,end-1)].^2*0.05)./U_inf^2,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),(2*[zeros(8000,1);R1e_5(:,end-1)].^2*0.05)./U_inf^2,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),(2*[zeros(8000,1);Mode_11(:,end-1)].^2*0.05)./U_inf^2,'LineWidth',1.5);
+plot(Tau_c(1:size([Base_lift(1:8000,2);Lift_constant_average(:,1)],1)),(2*[zeros(8000,1);R5e_5(:,end-1)].^2*0.05)./U_inf^2,'LineWidth',1.5);
 grid on
 ylabel('$C_\mu$','Interpreter','latex', FontSize=16)
 xlabel('$\tau$','Interpreter','latex', FontSize=16)
-xlim([0 39])
+%xlim([0 39])
 ylim([0 0.3])
 legend({'$R_\mathrm{LQR}=5\times 10^{-6}$','$R_\mathrm{LQR}=7.5\times 10^{-6}$','$R_\mathrm{LQR}=1\times 10^{-5}$', '$R_\mathrm{LQR}=3\times 10^{-5}$','$R_\mathrm{LQR}=5\times 10^{-5}$'}, ...
     'Interpreter','latex', ...
@@ -75,7 +83,6 @@ legend({'$R_\mathrm{LQR}=5\times 10^{-6}$','$R_\mathrm{LQR}=7.5\times 10^{-6}$',
     'Box','on');
 
 grid(ax3, 'on');
-box(ax3, 'off');
 
 colororder([ ...
     0/255 0/255 0/255;    ...
@@ -87,7 +94,7 @@ colororder([ ...
     ]);
 
 axs = [ax1 ax2 ax3];
-
+xlim(axs,'tight')
 set(axs, ...
     'FontName',      'Times New Roman', ...
     'FontSize',      18, ...
@@ -97,7 +104,8 @@ set(axs, ...
     'XMinorTick',    'on', ...
     'YMinorTick',    'on', ...
     'XScale',        'linear', ...
-    'Layer',         'bottom');
+    'Layer',         'bottom', ...
+    'box','on');
 
 
 ax1.XTickLabel = [];
@@ -107,4 +115,4 @@ ax1.YLabel.Units = 'normalized';
 ax2.YLabel.Units = 'normalized';
 ax3.YLabel.Units = 'normalized';
 
-exportgraphics(gcf,"figures\Fig11.eps","ContentType","vector")
+exportgraphics(gcf,"figures\Fig11.pdf","ContentType","vector")
