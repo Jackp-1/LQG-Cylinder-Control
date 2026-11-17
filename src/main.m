@@ -5,7 +5,7 @@ clc; close all; clear all;
 addpath utils\;
 addpath simulink\;
 addpath data\;
-load('train.mat');
+load('Train.mat');
 set(groot,'defaultAxesTickLabelInterpreter','latex');
 set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
